@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #8B4513;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+    border-radius: 10px;
+    border: 2px solid #8B4513;
+}
+
+.score-panel {
+    display: flex;
+    gap: 30px;
+}
+
+.score, .shots-remaining {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #8B4513;
+    padding: 8px 15px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.bow-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    color: #8B4513;
+}
+
+.bow-selector select {
+    padding: 8px 12px;
+    border: 2px solid #8B4513;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.game-canvas-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#gameCanvas {
+    border: 3px solid #8B4513;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 70%, #90EE90 100%);
+    cursor: crosshair;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#gameCanvas:active {
+    cursor: grabbing;
+}
+
+.aim-guide {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.power-meter {
+    width: 20px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.power-bar {
+    width: 100%;
+    background: linear-gradient(to top, #ff0000 0%, #ffff00 50%, #00ff00 100%);
+    transition: height 0.1s ease;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 8px 8px;
+}
+
+.angle-indicator {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #8B4513;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.angle-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 2px;
+    background: #ff0000;
+    transform-origin: left center;
+    transition: transform 0.1s ease;
+}
+
+.shot-history {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+}
+
+.shot-history h3 {
+    color: #8B4513;
+    margin-bottom: 10px;
+}
+
+.shot-result {
+    padding: 8px 15px;
+    margin: 5px 0;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.shot-result.bullseye {
+    background: #FFD700;
+    color: #8B4513;
+}
+
+.shot-result.inner {
+    background: #FFA500;
+    color: white;
+}
+
+.shot-result.middle {
+    background: #FF6347;
+    color: white;
+}
+
+.shot-result.outer {
+    background: #87CEEB;
+    color: #8B4513;
+}
+
+.shot-result.miss {
+    background: #DDD;
+    color: #666;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.restart-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, #FF6347, #FF4500);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(255, 99, 71, 0.6);
+}
+
+.restart-btn:active {
+    transform: translateY(0);
+}
+
+.instructions {
+    flex: 1;
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #8B4513;
+}
+
+.instructions p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.wind-indicator {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 2px solid #8B4513;
+    font-weight: bold;
+    color: #8B4513;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Game Over Screen */
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 3px solid #8B4513;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.game-over h2 {
+    color: #8B4513;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.final-score {
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #FF6347;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 800px;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+}
+
+/* Arrow Animation */
+@keyframes arrowFlight {
+    0% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.arrow-trail {
+    animation: arrowFlight 0.5s ease-out;
+}
+
+/* Hit Impact Animation */
+@keyframes hitImpact {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.hit-impact {
+    animation: hitImpact 0.3s ease-out;
+}

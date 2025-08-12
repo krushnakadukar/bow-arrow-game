@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Shot Bow Master</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>🏹 3-Shot Bow Master</h1>
+        
+        <div class="game-info">
+            <div class="score-panel">
+                <div class="score">Score: <span id="totalScore">0</span></div>
+                <div class="shots-remaining">Shots: <span id="shotsRemaining">3</span></div>
+            </div>
+            
+            <div class="bow-selector">
+                <label>Bow Mode:</label>
+                <select id="bowMode">
+                    <option value="standard">Standard Bow (Balanced)</option>
+                    <option value="power">Power Bow (High Force, Low Accuracy)</option>
+                    <option value="precision">Precision Bow (High Accuracy, Low Power)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="game-canvas-container">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div class="aim-guide" id="aimGuide">
+                <div class="power-meter">
+                    <div class="power-bar" id="powerBar"></div>
+                </div>
+                <div class="angle-indicator" id="angleIndicator"></div>
+            </div>
+        </div>
+
+        <div class="shot-history">
+            <h3>Shot History:</h3>
+            <div id="shotResults"></div>
+        </div>
+
+        <div class="game-controls">
+            <button id="restartBtn" class="restart-btn" style="display: none;">🎯 New Game</button>
+            <div class="instructions">
+                <p><strong>How to Play:</strong></p>
+                <p>• Click and drag on the canvas to aim</p>
+                <p>• Drag length = power, direction = angle</p>
+                <p>• Release to shoot your arrow</p>
+                <p>• Choose your bow mode before each shot</p>
+            </div>
+        </div>
+
+        <div class="wind-indicator" id="windIndicator">
+            <span>💨 Wind: </span>
+            <span id="windDirection">→</span>
+            <span id="windStrength">Medium</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
